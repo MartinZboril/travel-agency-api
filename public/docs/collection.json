@@ -1,0 +1,347 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "f8084b26-5ab5-4a23-a380-2ea6e6b5b308",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "GET api\/v1\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET Travels",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/travels",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Page number.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/travels?page=1"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Returns paginated list of travels.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":\"9958e389-5edf-48eb-8ecd-e058985cf3ce\",\"name\":\"First travel\", ...}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET Travel Tours",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/travels\/:travel_slug\/tours",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/travels\/:travel_slug\/tours",
+                            "variable": [
+                                {
+                                    "id": "travel_slug",
+                                    "key": "travel_slug",
+                                    "value": "%22first-travel%22",
+                                    "description": "Travel slug."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"priceFrom\":\"\\\"123.45\\\"\",\"priceTo\":\"\\\"234.56\\\"\",\"dateFrom\":\"\\\"2023-06-01\\\"\",\"dateTo\":\"\\\"2023-07-01\\\"\",\"sortBy\":\"\\\"price\\\"\",\"sortOrder\":\"\\\"asc\\\" or \\\"desc\\\"\"}"
+                        },
+                        "description": "Returns paginated list of tours by travel slug.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":\"9958e389-5edf-48eb-8ecd-e058985cf3ce\",\"name\":\"Tour on Sunday\",\"starting_date\":\"2023-06-11\",\"ending_date\":\"2023-06-16\", ...}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST Travel",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/travels",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/travels"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"is_public\":false,\"name\":\"qui\",\"description\":\"accusamus\",\"number_of_days\":4}"
+                        },
+                        "description": "Creates a new Travel record."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":\"996a36ca-2693-4901-9c55-7136e68d81d5\",\"name\":\"My new travel 234\",\"slug\":\"my-new-travel-234\", ...}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The name has already been taken.\",\"errors\":{\"name\":[\"The name has already been taken.\"]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST Tour",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/travels\/:travel_id\/tours",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/travels\/:travel_id\/tours",
+                            "variable": [
+                                {
+                                    "id": "travel_id",
+                                    "key": "travel_id",
+                                    "value": "729afffc-0b94-11ee-93f7-04421a4b5406",
+                                    "description": "The ID of the travel."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"est\",\"starting_date\":\"2023-06-16T11:04:29\",\"ending_date\":\"2113-05-08\",\"price\":62807333.4}"
+                        },
+                        "description": "Creates a new Tour record."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":\"996c6462-7c18-4b64-bf71-4d6832240b62\",\"name\":\"Tour for travel 234\",\"slug\":\"tour-for-travel-234\", ...}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The name field is required.\",\"errors\":{\"name\":[\"The name field is required.\"]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "PUT Travel",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/travels\/:travel_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/travels\/:travel_id",
+                            "variable": [
+                                {
+                                    "id": "travel_id",
+                                    "key": "travel_id",
+                                    "value": "729afffc-0b94-11ee-93f7-04421a4b5406",
+                                    "description": "The ID of the travel."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"is_public\":false,\"name\":\"minus\",\"description\":\"mollitia\",\"number_of_days\":10}"
+                        },
+                        "description": "Updates new Travel record."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":\"996a36ca-2693-4901-9c55-7136e68d81d5\",\"name\":\"My new travel 234\", ...}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"message\":\"The name has already been taken.\",\"errors\":{\"name\":[\"The name has already been taken.\"]}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "POST Login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"nathen91@example.net\",\"password\":\"~\\\"Q\\\/#<5b4~U5@X&KRZ\"}"
+                        },
+                        "description": "Login with the existing user.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"access_token\":\"1|a9ZcYzIrLURVGx6Xe41HKj1CrNsxRxe4pLA2oISo\"}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"error\": \"The provided credentials are incorrect.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
